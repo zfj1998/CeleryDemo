@@ -23,4 +23,5 @@ urlpatterns = [
     url(r'^compare/', No1_view.compare),
     url(r'^slow-celery/', No1_view.slow_celery),
     url(r'^show-celery/', No1_view.show_celery),
+    url(r'^timing/', No1_view.timing),
 ]

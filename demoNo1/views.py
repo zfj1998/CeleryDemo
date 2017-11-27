@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 
 from django.shortcuts import render
 from django.http import HttpResponse
-from task import spider,spider_2
+from task import spider,spider_2, showTime
 
 import time
 
@@ -12,9 +12,7 @@ def celery(request):
 	start = time.time()
 
 	key_words = ['django', 'celery', 'BeautifulSoup',
-	   			're', 'urllib2', 'Request','linux','pycharm',
-	               'git', 'bootstrap', 'ajax', 'jquery',
-	               'views' ,'django-celery', 'models']
+	   			're', 'urllib2','Request','linux','pycharm']
 
 	infos = []
 	works = []
@@ -29,9 +27,7 @@ def celery(request):
 
 def show_celery(request):
 	key_words = ['django', 'celery', 'BeautifulSoup',
-	   			're', 'urllib2', 'Request','linux','pycharm',
-	               'git', 'bootstrap', 'ajax', 'jquery',
-	               'views' ,'django-celery', 'models']
+	   			're', 'urllib2','Request','linux','pycharm']
 	infos = []
 	for word in key_words:
 		infos.append(spider.delay(word))
@@ -42,9 +38,7 @@ def slow_celery(request):
 	start = time.time()
 
 	key_words = ['django', 'celery', 'BeautifulSoup',
-	   			're', 'urllib2', 'Request','linux','pycharm',
-	               'git', 'bootstrap', 'ajax', 'jquery',
-	               'views' ,'django-celery', 'models']
+	   			're', 'urllib2','Request','linux','pycharm']
 
 	infos = []
 	for word in key_words:
@@ -58,14 +52,16 @@ def compare(request):
 	start = time.time()
 
 	key_words = ['django', 'celery', 'BeautifulSoup',
-	   			're', 'urllib2', 'Request','linux','pycharm',
-	               'git', 'bootstrap', 'ajax', 'jquery',
-	               'views' ,'django-celery', 'models']
+	   			're', 'urllib2','Request','linux','pycharm']
 
 	infos = []
 	for word in key_words:
-		infos.extend(spider(word))
+		infos.extend(spider_2(word))
 	
 	end = time.time()
 	infos = [{'Time Cost':[str(round(end-start,2))+'s']}] + infos
 	return render(request, 'home.html',{'infos':infos})
+
+def timing(request):
+	result = showTime()
+	return HttpResponse(result)

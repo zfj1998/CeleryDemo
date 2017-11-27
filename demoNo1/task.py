@@ -4,6 +4,7 @@ import urllib2
 from bs4 import BeautifulSoup
 import re
 import time
+from models import Time
 from celery import app
 
 
@@ -69,4 +70,31 @@ def spider_2(word):
     
     content.append(dic)
     return content
-			
+	
+@app.task    		
+def getTime():
+    now = time.strftime("%X")
+    today = time.strftime("%Y-%m-%d")
+    Time.objects.create(time=now, date=today)
+
+
+def showTime():
+    today = time.strftime("%Y-%m-%d")
+    items = Time.objects.filter(date=today)
+    result = []
+    j=0
+    for i in items:
+        result.insert(0, i.date+' '+i.time+'<br>')
+    result = result[:50]
+    return result
+
+@app.task 
+def timeKiller():
+    key_words = ['django', 'celery', 'BeautifulSoup',
+                're', 'urllib2','Request','linux','pycharm']
+
+    for word in key_words:
+        spider_2(word)
+
+
+

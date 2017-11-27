@@ -11,13 +11,26 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
 import os
-
+import datetime 
 import djcelery
+# from celery.schedules import crontab
+
 
 djcelery.setup_loader()
 BROKER_URL= 'amqp://guest@localhost//'
 CELERY_RESULT_BACKEND = 'amqp://guest@localhost//'
 CELERY_TASK_RESULT_EXPIRES = 3600
+CELERYBEAT_SCHEDULE = {
+    'timing': {
+        'task': 'demoNo1.task.getTime',
+        'schedule': datetime.timedelta(seconds=5),
+        # 'schedule':crontab(hour=7, minute=30, day_of_week=1), 
+    },
+    # 'spider': {
+    #     'task': 'demoNo1.task.timeKiller',
+    #     'schedule': datetime.timedelta(seconds=1),
+    # },
+}
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
