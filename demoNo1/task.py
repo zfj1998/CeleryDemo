@@ -19,7 +19,9 @@ def spider(word):
     start_str =  time.strftime("%Y-%m-%d %X")
 
     content = []
+    ###############
     dic = {word:[]}
+
     url = 'https://www.baidu.com/s?ie=utf-8&wd='+word
     req = urllib2.Request(url, data, headers)
     response = urllib2.urlopen(req)
@@ -36,8 +38,9 @@ def spider(word):
 
     time_duration = ['TimeDuration: '+str(round(end-start,2))+'s',start_str,end_str,' ']
     dic[word] = time_duration + dic[word]
-    
+    #################
     content.append(dic)
+
     return content
 
 def spider_2(word):
