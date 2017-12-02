@@ -21,12 +21,12 @@ BROKER_URL= 'amqp://guest@localhost//'
 CELERY_RESULT_BACKEND = 'amqp://guest@localhost//'
 CELERY_TASK_RESULT_EXPIRES = 3600 #length of the time of keeping task's result
 CELERYBEAT_SCHEDULE = {
-    # 'timing': {
-    #     'task': 'demoNo1.task.getTime',
-    #     'schedule': datetime.timedelta(seconds=1),
-    #     # 'schedule':crontab(hour=9, minute=54, day_of_week='sat'), 
-    #     # 'schedule':crontab(minute='*/10',hour='3,17,22', day_of_week='thu,fri'),
-    # },
+    'timing': {
+        'task': 'demoNo1.task.getTime',
+        'schedule': datetime.timedelta(seconds=1),
+        # 'schedule':crontab(hour=9, minute=54, day_of_week='sat'), 
+        # 'schedule':crontab(minute='*/10',hour='3,17,22', day_of_week='thu,fri'),
+    },
     # 'spider': {
     #     'task': 'demoNo1.task.timeKiller',
     #     'schedule': datetime.timedelta(seconds=2),
