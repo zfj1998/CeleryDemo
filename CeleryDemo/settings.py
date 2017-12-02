@@ -29,7 +29,7 @@ CELERYBEAT_SCHEDULE = {
     },
     # 'spider': {
     #     'task': 'demoNo1.task.timeKiller',
-    #     'schedule': datetime.timedelta(seconds=2),
+    #     'schedule': datetime.timedelta(seconds=1),
     # },
 }
 
