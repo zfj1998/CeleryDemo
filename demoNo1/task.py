@@ -31,6 +31,7 @@ def spider(word):
     for tag in a_tags:
         res = r'<a.*?>(.*?)</a>'
         raw_content = re.findall(res, str(tag), re.S|re.M)[0]
+        #################
         dic[word].append(raw_content.replace('<em>', '').replace('</em>', ''))
     
     end = time.time()
